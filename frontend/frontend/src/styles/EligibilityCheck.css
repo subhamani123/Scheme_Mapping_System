@@ -1,0 +1,95 @@
+/* Full-page background matching personal details page */
+.eligibility-container {
+    background-color: #09697a; /* Theme color */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* White form box */
+.eligibility-box {
+    width: 30%;
+    max-width: 600px;
+    background: #ffffff; /* White form background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Title */
+.eligibility-box h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #09697a; /* Theme color */
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.eligibility-box .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Labels */
+.eligibility-box .form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333; /* Dark label for readability */
+    margin-bottom: 5px;
+}
+
+/* Input & Select Fields */
+.eligibility-box .form-select {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f8f8f8;
+    transition: border 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.eligibility-box .form-select:focus {
+    border: 1px solid #09697a;
+    outline: none;
+}
+
+/* Button Group */
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 200px; /* Adjust spacing */
+        margin-top: 20px; /* Optional: Adds space above buttons */
+    }
+
+
+/* Back Button */
+.eligibility-box .btn-secondary {
+    background-color: #ccc;
+    color: #333;
+    width: 40%;
+    font-weight: bold;
+}
+
+.eligibility-box .btn-secondary:hover {
+    background-color: #bbb;
+}
+
+/* Next Button */
+.eligibility-box .btn-primary {
+    background-color: #09697a;
+    color: #ffffff;
+    width: 40%;
+    font-weight: bold;
+}
+
+.eligibility-box .btn-primary:hover {
+    background-color: #075b6a;
+}

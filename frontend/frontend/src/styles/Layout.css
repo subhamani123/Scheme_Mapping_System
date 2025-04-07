@@ -1,0 +1,30 @@
+/* Layout container styles */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full height */
+    width: 100%;
+    background-color: #f9f9f9; /* Light background */
+  }
+  
+  /* Hero Section should always be visible */
+  .hero-section {
+    width: 100%;
+    height: 350px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* Main Page Content Below Hero */
+  .page-content {
+    flex-grow: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
