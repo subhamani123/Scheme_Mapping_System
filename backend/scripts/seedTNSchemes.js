@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const Scheme = require("../models/Scheme"); // Make sure the path is correct
+const Scheme = require("../models/Scheme");
 
-// Tamil Nadu Student Schemes
 const tnStudentSchemes = [
   {
     title: "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme",
@@ -9,10 +8,14 @@ const tnStudentSchemes = [
     eligibilityCriteria: {
       gender: "Female",
       profession: "Student",
-      geoCategory: "Any",
       casteCategory: "Any",
-      studentCategory: "Government School",
-      domainOfInquiry: "Higher Education",
+      studentCategory: "undergraduate", // Change to lowercase
+      domainOfInquiry: "Education",
+      geoCategory: "Any",
+      povertyLineCategory: "below poverty",
+      exServicemen: false,
+      physicallyDisabled: false,
+      maritalStatus: "Single"
     }
   },
   {
@@ -20,8 +23,15 @@ const tnStudentSchemes = [
     description: "Free bicycles for students studying in Government and Government-aided schools (Classes 11 & 12).",
     eligibilityCriteria: {
       profession: "Student",
-      domainOfInquiry: "School",
-      studentCategory: "Government School",
+      studentCategory: "higher secondary", // Change to lowercase
+      domainOfInquiry: "Education",
+      casteCategory: "Any",
+      gender: "Any",
+      geoCategory: "Any",
+      povertyLineCategory: "Any",
+      exServicemen: false,
+      physicallyDisabled: false,
+      maritalStatus: "Any"
     }
   },
   {
@@ -29,8 +39,15 @@ const tnStudentSchemes = [
     description: "Scholarship for top-scoring 10th & 12th students in state board exams.",
     eligibilityCriteria: {
       profession: "Student",
-      studentCategory: "Meritorious",
-      domainOfInquiry: "Higher Secondary",
+      studentCategory: "higher secondary", // Change to lowercase
+      domainOfInquiry: "Education",
+      casteCategory: "Any",
+      gender: "Any",
+      geoCategory: "Any",
+      povertyLineCategory: "Any",
+      exServicemen: false,
+      physicallyDisabled: false,
+      maritalStatus: "Any"
     }
   },
   {
@@ -38,18 +55,31 @@ const tnStudentSchemes = [
     description: "₹6000 annually for engineering students from government higher secondary schools.",
     eligibilityCriteria: {
       profession: "Student",
+      studentCategory: "higher secondary", // Change to lowercase
       domainOfInquiry: "Engineering",
-      studentCategory: "Government School",
       casteCategory: "Any",
+      gender: "Any",
+      geoCategory: "Rural",
+      povertyLineCategory: "below poverty",
+      exServicemen: false,
+      physicallyDisabled: false,
+      maritalStatus: "Any"
     }
   },
   {
     title: "Post Matric Scholarship (SC/ST)",
     description: "Reimbursement of fees for SC/ST students in post-matric classes in Tamil Nadu.",
     eligibilityCriteria: {
-      casteCategory: "SC",
+      casteCategory: "SC/ST",
       profession: "Student",
-      domainOfInquiry: "Any",
+      studentCategory: "undergraduate", // Change to lowercase
+      domainOfInquiry: "Education",
+      gender: "Any",
+      geoCategory: "Any",
+      povertyLineCategory: "below poverty",
+      exServicemen: false,
+      physicallyDisabled: false,
+      maritalStatus: "Any"
     }
   },
   {
@@ -58,13 +88,20 @@ const tnStudentSchemes = [
     eligibilityCriteria: {
       profession: "Student",
       parentProfession: "Farmer",
-      domainOfInquiry: "Higher Education",
+      domainOfInquiry: "Education",
+      casteCategory: "Any",
+      studentCategory: "undergraduate", // Change to lowercase
+      gender: "Any",
+      geoCategory: "Rural",
+      povertyLineCategory: "below poverty",
+      exServicemen: false,
+      physicallyDisabled: false,
+      maritalStatus: "Any"
     }
   }
 ];
 
-// MongoDB connection
-const MONGO_URI = "mongodb://localhost:27017/authDB"; // Update this if needed
+const MONGO_URI = "mongodb://localhost:27017/authDB";
 
 const seedDatabase = async () => {
   try {

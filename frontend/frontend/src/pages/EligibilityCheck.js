@@ -74,9 +74,8 @@ const EligibilityCheck = () => {
                   <Form.Label>Which category do you belong to?</Form.Label>
                   <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="">Select your category</option>
-                    <option>SC/ST</option>
-                    <option>OBC</option>
-                    <option>General</option>
+                    <option>below poverty</option>
+                    <option>above poverty</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -121,6 +120,7 @@ const EligibilityCheck = () => {
                     <option value="">Select your marital status</option>
                     <option>Single</option>
                     <option>Married</option>
+                    <option>widow</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

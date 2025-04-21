@@ -5,9 +5,9 @@ const PersonalDetailsSchema = new mongoose.Schema({
     dob: { type: Date, required: true },
     casteCategory: { type: String, required: true },
     profession: { type: String, required: true },
-    studentCategory: { type: String }, // optional
+    category: { type: String }, // optional
     domainOfInquiry: { type: String, required: true },
-    category: { type: String, required: true },
+    category: { type: String, required: true }, // ✅ updated here
     exServicemen: { type: Boolean, default: false },
     geoCategory: { type: String, required: true },
     physicallyDisabled: { type: Boolean, default: false },

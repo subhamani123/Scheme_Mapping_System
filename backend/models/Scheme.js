@@ -10,7 +10,7 @@ const schemeSchema = new mongoose.Schema({
     profession: String,
     studentCategory: String,
     domainOfInquiry: String,
-    category: String,
+    povertyLineCategory: String,
     exServicemen: Boolean,
     geoCategory: String,
     physicallyDisabled: Boolean,

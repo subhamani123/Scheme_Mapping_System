@@ -27,24 +27,31 @@ exports.getSchemes = async (req, res) => {
 const matchesEligibility = (schemeCriteria, userCriteria) => {
   return Object.entries(schemeCriteria).every(([key, schemeValue]) => {
     const userValue = userCriteria[key];
-
-    // If scheme does not restrict this field, allow any value
-    if (schemeValue === undefined || schemeValue === "Any" || schemeValue === "") return true;
-
-    // For boolean fields
-    if (typeof schemeValue === "boolean") {
-      return schemeValue === Boolean(userValue);
+    
+    console.log(`[Eligibility Check] Key: ${key}, Scheme Value: ${schemeValue}, User Value: ${userValue}`);
+    
+    // If scheme doesn't restrict this field
+    if (schemeValue === undefined || schemeValue === "Any" || schemeValue === "") {
+      console.log(`[Eligibility Check] Key: ${key} - Skipping comparison (no restriction)`);
+      return true;
     }
 
-    // For string fields (case-insensitive)
-    return schemeValue?.toLowerCase() === userValue?.toLowerCase();
+    // Normalize for comparison
+    const normalizedScheme = typeof schemeValue === "string" ? schemeValue.trim().toLowerCase() : schemeValue;
+    const normalizedUser = typeof userValue === "string" ? userValue.trim().toLowerCase() : userValue;
+
+    const isMatch = normalizedScheme === normalizedUser;
+
+    console.log(`[Eligibility Check] ${key}: scheme="${normalizedScheme}" | user="${normalizedUser}" => ${isMatch}`);
+
+    return isMatch;
   });
 };
 
-// Filter eligible schemes
+// Check eligible schemes based on user data
 exports.checkEligibility = async (req, res) => {
   try {
-    // Normalize user input
+    // Normalize incoming criteria
     const criteria = Object.fromEntries(
       Object.entries(req.body).map(([key, value]) => [
         key,
@@ -52,13 +59,14 @@ exports.checkEligibility = async (req, res) => {
       ])
     );
 
-    console.log("Incoming eligibility criteria:", criteria);
+    console.log("📥 Incoming eligibility criteria:", criteria);
 
     const schemes = await Scheme.find({ "eligibilityCriteria": { $exists: true } });
 
-    const eligible = schemes.filter(scheme =>
-      matchesEligibility(scheme.eligibilityCriteria, criteria)
-    );
+    const eligible = schemes.filter(scheme => {
+      console.log("📜 Scheme eligibility criteria:", scheme.eligibilityCriteria);
+      return matchesEligibility(scheme.eligibilityCriteria, criteria);
+    });
 
     if (eligible.length === 0) {
       return res.status(200).json({ message: "No matching schemes found", schemes: [] });
@@ -66,7 +74,7 @@ exports.checkEligibility = async (req, res) => {
 
     res.status(200).json({ message: "Matching schemes found", schemes: eligible });
   } catch (err) {
-    console.error("Error checking eligibility:", err);
+    console.error("❌ Error checking eligibility:", err);
     res.status(500).json({
       message: "Error checking eligibility",
       error: err.message,
@@ -75,7 +83,7 @@ exports.checkEligibility = async (req, res) => {
   }
 };
 
-// Health check for the API
+// Health check
 exports.healthCheck = (req, res) => {
   res.status(200).json({ message: "Schemes API is running fine 🚀" });
 };
