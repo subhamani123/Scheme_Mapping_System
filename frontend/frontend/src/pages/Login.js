@@ -1,9 +1,53 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Use useNavigate for redirection
+import axios from "axios"; // Import axios
 import "../App.css";
 import logo from "../assests/leaf.png"; // Fixed path
 
 const LoginPage = () => {
+  const navigate = useNavigate(); // Use navigate to handle redirection
+
+  // Form data state management
+  const [formData, setFormData] = useState({
+    emailOrPhone: "",
+    password: "",
+  });
+
+  // Handle form data change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Basic validation (you can extend this if needed)
+    if (!formData.emailOrPhone || !formData.password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        emailOrPhone: formData.emailOrPhone,
+        password: formData.password,
+      });
+
+      // Store the token and user details (you can store in localStorage, sessionStorage, or context API)
+      localStorage.setItem("token", response.data.token); // Store the token in localStorage
+      localStorage.setItem("user", JSON.stringify(response.data.user)); // Store user details (optional)
+
+      alert(response.data.message); // Show success message
+
+      // Redirect to the homepage (or any other page you want)
+      navigate("/"); // Redirect to the homepage ("/"), or use another path like "/dashboard"
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="container">
       {/* Left Section: Logo, Title, Description */}
@@ -18,12 +62,26 @@ const LoginPage = () => {
       {/* Right Section: Login Form */}
       <div className="right-section">
         <div className="login-box">
-          <form>
+          <form onSubmit={handleSubmit}>
             <label>Email or Phone Number</label>
-            <input type="text" placeholder="Enter your email or phone number" required />
+            <input
+              type="text"
+              name="emailOrPhone"
+              placeholder="Enter your email or phone number"
+              value={formData.emailOrPhone}
+              onChange={handleChange}
+              required
+            />
             
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
             
             <div className="options">
               <div>
@@ -50,3 +108,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+

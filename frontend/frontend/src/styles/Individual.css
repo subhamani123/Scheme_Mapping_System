@@ -1,120 +1,119 @@
 /* Set the entire page background to theme color */
 /* Apply background color only to Individual Details page */
 .individual-page {
-    background-color: #09697a; /* Theme color */
-    min-height: 100vh; /* Full screen height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Container Styling (White Form Box) */
-  .individual-details-container {
-    width: 30%;
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px;
-    background: #ffffff; /* White form background */
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: Arial, sans-serif;
-    color: #333; /* Dark text for readability */
-  }
-  
-  /* Title & Subtitle */
-  .individual-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #09697a; /* Theme color for title */
-  }
-  
-  .individual-subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  /* Form Group */
-  .individual-form-group {
-    width: 100%;
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Labels */
-  .individual-form-group label {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333; /* Dark label for readability */
-    margin-bottom: 5px;
-    width: 100%;
-    text-align: left;
-  }
-  
-  /* Input & Select Fields */
-  .individual-form-group input,
-  .individual-form-group select {
-    width: 100%;
-    max-width: 400px;
-    height: 45px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #f8f8f8;
-    transition: border 0.3s ease-in-out;
-    box-sizing: border-box;
-  }
-  
-  .individual-form-group input:focus,
-  .individual-form-group select:focus {
-    border: 1px solid #09697a;
-    outline: none;
-  }
-  
-  /* Button Container */
-  .individual-button-group {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto 0;
-  }
-  
-  /* Buttons */
-  .individual-button {
-    width: 48%;
-    height: 45px;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    text-align: center;
-  }
-  
-  /* Back Button */
-  .individual-back-btn {
-    background-color: #ccc;
-    color: #333;
-  }
-  
-  .individual-back-btn:hover {
-    background-color: #bbb;
-  }
-  
-  /* Next Button */
-  .individual-next-btn {
-    background-color: #09697a;
-    color: #ffffff;
-  }
-  
-  .individual-next-btn:hover {
-    background-color: #075b6a;
-  }
-  
+  background-color: #09697a; /* Theme color */
+  min-height: 100vh; /* Full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container Styling (White Form Box) */
+.individual-details-container {
+  width: 30%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #ffffff; /* White form background */
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333; /* Dark text for readability */
+}
+
+/* Title & Subtitle */
+.individual-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #09697a; /* Theme color for title */
+}
+
+.individual-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Form Group */
+.individual-form-group {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels */
+.individual-form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333; /* Dark label for readability */
+  margin-bottom: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+/* Input & Select Fields */
+.individual-form-group input,
+.individual-form-group select {
+  width: 100%;
+  max-width: 400px;
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f8f8f8;
+  transition: border 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.individual-form-group input:focus,
+.individual-form-group select:focus {
+  border: 1px solid #09697a;
+  outline: none;
+}
+
+/* Button Container */
+.individual-button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto 0;
+}
+
+/* Buttons */
+.individual-button {
+  width: 48%;
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+}
+
+/* Back Button */
+.individual-back-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.individual-back-btn:hover {
+  background-color: #bbb;
+}
+
+/* Next Button */
+.individual-next-btn {
+  background-color: #09697a;
+  color: #ffffff;
+}
+
+.individual-next-btn:hover {
+  background-color: #075b6a;
+}

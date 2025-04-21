@@ -1,70 +1,81 @@
 const Scheme = require("../models/Scheme");
 
-// Function to get eligible schemes based on user details
-const getEligibleSchemes = async (req, res) => {
+// Add a scheme
+exports.addScheme = async (req, res) => {
   try {
-    const {
-      gender,
-      dateOfBirth,
-      casteCategory,
-      profession,
-      studentCategory,
-      domain,
-      category,
-      exServicemen,
-      geographicalCategory,
-      physicallyDisabled,
-      maritalStatus,
-    } = req.body;
-
-    // Calculate user's age from date of birth
-    const birthYear = new Date(dateOfBirth).getFullYear();
-    const currentYear = new Date().getFullYear();
-    const age = currentYear - birthYear;
-
-    // Find eligible schemes based on criteria
-    const eligibleSchemes = await Scheme.find({
-      $or: [{ gender: gender }, { gender: "Any" }],
-      $or: [{ casteCategory: casteCategory }, { casteCategory: "Any" }],
-      $or: [{ profession: profession }, { profession: "Any" }],
-      $or: [{ studentCategory: studentCategory }, { studentCategory: "Any" }],
-      $or: [{ domain: domain }, { domain: "Any" }],
-      $or: [{ category: category }, { category: "Any" }],
-      $or: [{ geographicalCategory: geographicalCategory }, { geographicalCategory: "Any" }],
-      $or: [{ maritalStatus: maritalStatus }, { maritalStatus: "Any" }],
-      $or: [{ physicallyDisabled: physicallyDisabled }, { physicallyDisabled: false }],
-      $or: [{ exServicemen: exServicemen }, { exServicemen: false }],
-      ageRange: { min: { $lte: age }, max: { $gte: age } },
-    });
-
-    res.status(200).json({ schemes: eligibleSchemes });
-  } catch (error) {
-    console.error("Error fetching schemes:", error);
-    res.status(500).json({ message: "Server Error", error });
+    const scheme = new Scheme(req.body);
+    await scheme.save();
+    res.status(201).json({ message: "Scheme added successfully", scheme });
+  } catch (err) {
+    console.error("Error adding scheme:", err);
+    res.status(500).json({ message: "Error adding scheme", error: err.message });
   }
 };
 
-// Function to add a new scheme (for admin use)
-const addScheme = async (req, res) => {
-  try {
-    const newScheme = new Scheme(req.body);
-    await newScheme.save();
-    res.status(201).json({ message: "Scheme added successfully", scheme: newScheme });
-  } catch (error) {
-    console.error("Error adding scheme:", error);
-    res.status(500).json({ message: "Server Error", error });
-  }
-};
-
-// Function to get all schemes (for admin or users)
-const getAllSchemes = async (req, res) => {
+// Get all schemes
+exports.getSchemes = async (req, res) => {
   try {
     const schemes = await Scheme.find();
-    res.status(200).json({ schemes });
-  } catch (error) {
-    console.error("Error fetching all schemes:", error);
-    res.status(500).json({ message: "Server Error", error });
+    res.json(schemes);
+  } catch (err) {
+    console.error("Error retrieving schemes:", err);
+    res.status(500).json({ message: "Error retrieving schemes", error: err.message });
   }
 };
 
-module.exports = { getEligibleSchemes, addScheme, getAllSchemes };
+// Helper: match user input to scheme eligibility
+const matchesEligibility = (schemeCriteria, userCriteria) => {
+  return Object.entries(schemeCriteria).every(([key, schemeValue]) => {
+    const userValue = userCriteria[key];
+
+    // If scheme does not restrict this field, allow any value
+    if (schemeValue === undefined || schemeValue === "Any" || schemeValue === "") return true;
+
+    // For boolean fields
+    if (typeof schemeValue === "boolean") {
+      return schemeValue === Boolean(userValue);
+    }
+
+    // For string fields (case-insensitive)
+    return schemeValue?.toLowerCase() === userValue?.toLowerCase();
+  });
+};
+
+// Filter eligible schemes
+exports.checkEligibility = async (req, res) => {
+  try {
+    // Normalize user input
+    const criteria = Object.fromEntries(
+      Object.entries(req.body).map(([key, value]) => [
+        key,
+        typeof value === "string" ? value.trim().toLowerCase() : value,
+      ])
+    );
+
+    console.log("Incoming eligibility criteria:", criteria);
+
+    const schemes = await Scheme.find({ "eligibilityCriteria": { $exists: true } });
+
+    const eligible = schemes.filter(scheme =>
+      matchesEligibility(scheme.eligibilityCriteria, criteria)
+    );
+
+    if (eligible.length === 0) {
+      return res.status(200).json({ message: "No matching schemes found", schemes: [] });
+    }
+
+    res.status(200).json({ message: "Matching schemes found", schemes: eligible });
+  } catch (err) {
+    console.error("Error checking eligibility:", err);
+    res.status(500).json({
+      message: "Error checking eligibility",
+      error: err.message,
+      stack: process.env.NODE_ENV === "development" ? err.stack : undefined
+    });
+  }
+};
+
+// Health check for the API
+exports.healthCheck = (req, res) => {
+  res.status(200).json({ message: "Schemes API is running fine 🚀" });
+};

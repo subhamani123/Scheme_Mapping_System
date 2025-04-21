@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // ✅ import axios
 import "../App.css";
 import logo from "../assests/leaf.png";
 import "../styles/Signup.css"; // Ensure the correct path
 
+
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -16,14 +20,28 @@ const SignUpPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    // Handle sign-up logic here
-    console.log("User Signed Up:", formData);
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/signup", {
+        fullName: formData.name,
+        emailOrPhone: formData.contact,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+      });
+
+      alert(response.data.message); // ✅ Show success message
+      navigate("/login");// Redirect to login or clear form, as needed
+    } catch (error) {
+      console.error("Signup error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Something went wrong. Please try again.");
+    }
   };
 
   return (

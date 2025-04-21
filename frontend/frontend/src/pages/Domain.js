@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGraduationCap, FaHospital, FaIndustry, FaTractor, FaHome, FaRunning } from "react-icons/fa";
 import "../styles/Domain.css";
+import { useUserData } from "../context/UserDataContext"; // 👈 import context
 
 const DomainOfEnquiry = () => {
   const [selectedDomain, setSelectedDomain] = useState("");
-  const navigate = useNavigate(); // ✅ Use navigate for routing
+  const navigate = useNavigate();
+  const { updateUserData } = useUserData(); // 👈 grab updater from context
 
   const domains = [
     { name: "Education", icon: <FaGraduationCap /> },
@@ -15,6 +17,11 @@ const DomainOfEnquiry = () => {
     { name: "Housing", icon: <FaHome /> },
     { name: "Sports, Arts & Culture", icon: <FaRunning /> },
   ];
+
+  const handleNext = () => {
+    updateUserData({ domainOfInquiry: selectedDomain }); // 👈 save to context
+    navigate("/eligibilitycheck");
+  };
 
   return (
     <div className="domain-container">
@@ -32,11 +39,11 @@ const DomainOfEnquiry = () => {
         ))}
       </div>
       <div className="domain-buttons">
-        <button className="back-btn" onClick={() => navigate(-1)}>Back</button> {/* ✅ Navigate back */}
+        <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
         <button 
           className="next-btn" 
-          onClick={() => navigate("/eligibilitycheck")} // ✅ Navigate to EligibilityCheck page
-          disabled={!selectedDomain} // Prevent navigation if no domain is selected
+          onClick={handleNext}
+          disabled={!selectedDomain}
         >
           Next
         </button>

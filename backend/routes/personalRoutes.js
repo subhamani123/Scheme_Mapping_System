@@ -3,7 +3,7 @@ const { savePersonalDetails, getPersonalDetails } = require("../controllers/pers
 
 const router = express.Router();
 
-router.post("/save", savePersonalDetails);
+router.post("/details", savePersonalDetails);
 router.get("/get", getPersonalDetails);
 
 module.exports = router;

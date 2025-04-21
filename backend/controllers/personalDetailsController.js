@@ -3,10 +3,23 @@ const PersonalDetails = require("../models/PersonalDetails");
 // POST: Save Personal Details
 exports.savePersonalDetails = async (req, res) => {
     try {
-        const { gender, dob, casteCategory, profession, studentCategory } = req.body;
+        const {
+            gender,
+            dob,
+            casteCategory,
+            profession,
+            studentCategory,
+            domainOfInquiry,
+            category,
+            exServicemen,
+            geoCategory,
+            physicallyDisabled,
+            maritalStatus
+        } = req.body;
 
-        if (!gender || !dob || !casteCategory || !profession) {
-            return res.status(400).json({ message: "All fields are required except student category" });
+        // Validation
+        if (!gender || !dob || !casteCategory || !profession || !domainOfInquiry || !category || !geoCategory || !maritalStatus) {
+            return res.status(400).json({ message: "All fields are required except studentCategory, exServicemen, and physicallyDisabled" });
         }
 
         const details = new PersonalDetails({
@@ -15,6 +28,12 @@ exports.savePersonalDetails = async (req, res) => {
             casteCategory,
             profession,
             studentCategory: profession === "Student" ? studentCategory : null,
+            domainOfInquiry,
+            category,
+            exServicemen,
+            geoCategory,
+            physicallyDisabled,
+            maritalStatus
         });
 
         await details.save();
@@ -24,7 +43,7 @@ exports.savePersonalDetails = async (req, res) => {
     }
 };
 
-// GET: Retrieve Personal Details (optional)
+// GET: Retrieve Personal Details
 exports.getPersonalDetails = async (req, res) => {
     try {
         const details = await PersonalDetails.find();

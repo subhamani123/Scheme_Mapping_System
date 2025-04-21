@@ -1,19 +1,21 @@
+// models/Scheme.js
 const mongoose = require("mongoose");
 
 const schemeSchema = new mongoose.Schema({
-  name: String,
-  gender: [String], // ["Male", "Female", "Other"]
-  casteCategory: [String], // ["General", "SC", "ST", "OBC"]
-  profession: [String], // ["Student", "Farmer", "Employee", "Unemployed"]
-  exServicemen: Boolean,
-  physicallyDisabled: Boolean,
-  maritalStatus: [String], // ["Married", "Unmarried", "Widowed"]
-  geographicalCategory: [String], // ["Urban", "Rural", "Tribal"]
-  studentCategory: [String],
-  domain: [String],
-  ageRange: { min: Number, max: Number },
+  title: String,
+  description: String,
+  eligibilityCriteria: {
+    gender: String,
+    casteCategory: String,
+    profession: String,
+    studentCategory: String,
+    domainOfInquiry: String,
+    category: String,
+    exServicemen: Boolean,
+    geoCategory: String,
+    physicallyDisabled: Boolean,
+    maritalStatus: String,
+  },
 });
 
-const Scheme = mongoose.model("Scheme", schemeSchema);
-
-module.exports = Scheme;
+module.exports = mongoose.model("Scheme", schemeSchema);
