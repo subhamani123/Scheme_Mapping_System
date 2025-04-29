@@ -6,7 +6,7 @@ import { useUserData } from "../context/UserDataContext";
 import "../styles/EligibilityCheck.css";
 
 const EligibilityCheck = () => {
-  const [category, setCategory] = useState("");
+  const [povertyLineCategory, setPovertyLineCategory] = useState("");
   const [exService, setExService] = useState("");
   const [geoCategory, setGeoCategory] = useState("");
   const [disability, setDisability] = useState("");
@@ -16,14 +16,14 @@ const EligibilityCheck = () => {
   const navigate = useNavigate();
 
   const handleNext = async () => {
-    if (!category || !exService || !geoCategory || !disability || !maritalStatus) {
+    if (!povertyLineCategory || !exService || !geoCategory || !disability || !maritalStatus) {
       alert("Please fill in all fields.");
       return;
     }
 
     const dataToSubmit = {
       ...userData,
-      category,
+      category: povertyLineCategory,
       exServicemen: exService === "Yes",
       geoCategory,
       physicallyDisabled: disability === "Yes",
@@ -39,7 +39,6 @@ const EligibilityCheck = () => {
       const response = await axios.post("http://localhost:5000/api/personal/details", dataToSubmit);
       console.log("Submission successful:", response.data);
 
-      // ✅ FIX: use dataToSubmit instead of undefined formData
       navigate("/eligible-schemes", {
         state: {
           criteria: dataToSubmit,
@@ -71,8 +70,11 @@ const EligibilityCheck = () => {
             <Row className="g-3">
               <Col lg={6} md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Which category do you belong to?</Form.Label>
-                  <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
+                  <Form.Label>Do you belong to the Below Poverty Line (BPL)?</Form.Label>
+                  <Form.Select
+                    value={povertyLineCategory}
+                    onChange={(e) => setPovertyLineCategory(e.target.value)}
+                  >
                     <option value="">Select your category</option>
                     <option>below poverty</option>
                     <option>above poverty</option>

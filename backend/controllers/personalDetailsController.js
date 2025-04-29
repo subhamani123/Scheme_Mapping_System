@@ -10,7 +10,7 @@ exports.savePersonalDetails = async (req, res) => {
       profession,
       studentCategory,
       domainOfInquiry,
-      category,
+      povertyLineCategory, // ✅ updated key
       exServicemen,
       geoCategory,
       physicallyDisabled,
@@ -25,7 +25,7 @@ exports.savePersonalDetails = async (req, res) => {
       profession,
       studentCategory,
       domainOfInquiry,
-      category,
+      povertyLineCategory,
       exServicemen,
       geoCategory,
       physicallyDisabled,
@@ -39,7 +39,7 @@ exports.savePersonalDetails = async (req, res) => {
       !casteCategory?.trim() ||
       !profession?.trim() ||
       !domainOfInquiry?.trim() ||
-      !category?.trim() ||
+      !povertyLineCategory?.trim() || // ✅ updated validation key
       !geoCategory?.trim() ||
       !maritalStatus?.trim()
     ) {
@@ -49,7 +49,7 @@ exports.savePersonalDetails = async (req, res) => {
         casteCategory,
         profession,
         domainOfInquiry,
-        category,
+        povertyLineCategory,
         geoCategory,
         maritalStatus,
       });
@@ -67,7 +67,7 @@ exports.savePersonalDetails = async (req, res) => {
       profession,
       studentCategory: profession === "Student" ? studentCategory : null,
       domainOfInquiry,
-      category,
+      povertyLineCategory, // ✅ ensure correct DB field
       exServicemen: exServicemen ?? false,
       geoCategory,
       physicallyDisabled: physicallyDisabled ?? false,
@@ -93,5 +93,3 @@ exports.getPersonalDetails = async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 };
-
-

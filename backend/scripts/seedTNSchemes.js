@@ -12,7 +12,7 @@ const tnStudentSchemes = [
       studentCategory: "undergraduate", // Change to lowercase
       domainOfInquiry: "Education",
       geoCategory: "Any",
-      povertyLineCategory: "below poverty",
+      povertyLineCategory: "Any",
       exServicemen: false,
       physicallyDisabled: false,
       maritalStatus: "Single"
