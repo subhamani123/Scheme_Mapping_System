@@ -13,6 +13,7 @@ import DomainOfEnquiry from "./pages/Domain";
 import EligibleSchemes from "./pages/EligibleSchemes";
 import EligibilityCheck from "./pages/EligibilityCheck";
 import FAQ from "./pages/faq";
+import ContactPage from "./pages/contact";
 
 // ✅ Import the context provider
 import { UserDataProvider } from "./context/UserDataContext";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/eligibilitycheck" element={<EligibilityCheck />} />
           <Route path="/eligible-schemes" element={<EligibleSchemes />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Router>
     </UserDataProvider>
