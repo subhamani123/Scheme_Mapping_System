@@ -1,0 +1,109 @@
+.faq-section {
+    padding: 40px 20px;
+    background-color: #f1f1f1;
+  }
+  
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 25px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .faq-header {
+    text-align: center;
+  }
+  
+  .faq-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #09697a;
+    margin-bottom: 15px;
+  }
+  
+  .faq-search {
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .faq-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .faq-question {
+    background-color: #09697a;
+    color: white;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    text-align: left;
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
+  
+  .faq-answer {
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .faq-feedback {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .faq-like,
+  .faq-dislike {
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .faq-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .faq-user-input {
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .faq-submit-btn {
+    background-color: #09697a;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  

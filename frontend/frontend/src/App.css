@@ -1,166 +1,4 @@
-/* Login Page Styling */
-/* Full page container */
-/* Main container: Divides page into two equal parts */
-/* Main container: Divides page into two parts (left 55%, right 45%) */
-.container {
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Left Section: Bigger background */
-.left-section {
-  width: 55%; /* Left side takes 55% */
-  height: 80%;
-  background-color: #09697a;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 50px;
-}
-
-/* Bigger Logo */
-.logo-image {
-  width: 150px;  /* Increase logo size */
-  height: auto;
-  margin-bottom: -30px;
-}
-
-.brand-title {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.brand-description {
-  font-size: 18px;
-  max-width: 80%;
-  line-height: 1.4;
-}
-
-/* Right Section: Login Form (Smaller size) */
-.right-section {
-  width: 45%;  /* Right side takes 45% */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  padding: 20px;
-}
-
-/* Login Box */
-.login-box {
-  width: 350px;
-  padding: 25px;
-  background: #ffffff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  text-align: center;
-}
-
-/* Form Fields */
-.login-box form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.login-box input {
-  margin-bottom: 12px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-/* Remember Me & Recover Password */
-.options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  margin: 10px 0;
-  gap: 5px;
-}
-
-.recover {
-  text-decoration: none;
-  color: #0e98b1;
-}
-
-.recover:hover {
-  text-decoration: underline;
-}
-
-/* Sign-in Button */
-button {
-  background-color: #09697a;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-button:hover {
-  background-color: #0c7a91;
-}
-
-/* Register & Home Links */
-.register-link,
-.home-link {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-.register-link a,
-.home-link a {
-  color: #0e98b1;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.register-link a:hover,
-.home-link a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .left-section {
-    width: 100%;
-    height: auto;
-    padding: 30px;
-  }
-
-  .right-section {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .login-box {
-    width: 90%;
-  }
-
-  .logo-image {
-    width: 100px; /* Slightly smaller logo for mobile */
-  }
-}
-
-/* General Styles */
+/* HomePage.css */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -169,25 +7,23 @@ body {
 }
 
 /* Navbar */
-/* Navbar Styling */
-/* Navbar Styling */
 .navbar {
-  height: 50px;
+  height: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: #09697a; /* Dark Green */
+  background-color: #09697a;
   padding: 15px 30px;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow */
-  position: fixed; /* Keeps navbar at the top */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 1000; /* Ensures it stays above other elements */
+  z-index: 1000;
 }
 
-/* Logo Styles */
 .logo {
   display: flex;
   align-items: center;
@@ -201,11 +37,11 @@ body {
   margin-right: 15px;
 }
 
-/* Navigation Links */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 20px;
+  flex-direction: row;
 }
 
 .nav-links li {
@@ -217,11 +53,10 @@ body {
   color: white;
   font-weight: bold;
   font-size: 1rem;
-  position: relative; /* Required for the hover effect */
+  position: relative;
   transition: color 0.3s ease;
 }
 
-/* Hover effect: underline animation */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -235,20 +70,19 @@ body {
 }
 
 .nav-links a:hover {
-  color: #c0e2e7; /* Lightened color on hover */
+  color: #c0e2e7;
 }
 
 .nav-links a:hover::after {
-  transform: scaleX(1); /* Expands underline on hover */
+  transform: scaleX(1);
 }
 
-/* Authentication Buttons */
+/* Auth Buttons */
 .auth-buttons {
   display: flex;
   gap: 10px;
 }
 
-/* Common styles for buttons */
 .signin-btn, .signup-btn {
   width: 130px;
   height: 40px;
@@ -257,50 +91,34 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
   text-align: center;
 }
 
-/* Sign-in Button */
 .signin-btn {
   background-color: white;
   color: #09697a;
   border: 2px solid #09697a;
 }
 
-.signin-btn:hover {
-  background-color: #09697a;
-  color: white;
-  transform: scale(1.05); /* Slight scale effect */
-}
-
-/* Sign-up Button */
 .signup-btn {
   background-color: #09697a;
   color: white;
   border: 2px solid #09697a;
 }
 
-.signup-btn:hover {
-  background-color: white;
-  color: #09697a;
-  transform: scale(1.05);
-}
-
-
 /* Hero Section */
 .hero-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 80px 5%;
+  padding: 100px 5% 60px;
   background: #f4f4f4;
-  height: 80vh; /* Consistent height like the login page */
+  height: 80vh;
+  flex-direction: row;
 }
 
-/* Left Content Section */
 .hero-text {
-  width: 55%; /* Takes 55% of the width */
+  width: 55%;
   text-align: left;
 }
 
@@ -314,7 +132,6 @@ body {
 .hero-text p {
   font-size: 18px;
   color: #555;
-  line-height: 1.5;
 }
 
 .explore-btn {
@@ -326,19 +143,12 @@ body {
   font-size: 16px;
   margin-top: 20px;
   border-radius: 5px;
-  transition: background 0.3s;
 }
 
-.explore-btn:hover {
-  background-color: #255b64;
-}
-
-/* Right Image Section */
 .hero-image {
-  width: 45%; /* Takes 45% of the width */
+  width: 45%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .hero-image img {
@@ -348,37 +158,29 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive Design */
+/* Responsive Styles */
 @media screen and (max-width: 992px) {
   .hero-section {
     flex-direction: column;
-    text-align: center;
     height: auto;
+    text-align: center;
   }
 
   .hero-text, .hero-image {
     width: 100%;
-    text-align: center;
-  }
-
-  .hero-text {
-    padding: 0 10%;
-  }
-
-  .hero-text h1 {
-    font-size: 28px;
-  }
-
-  .hero-text p {
-    font-size: 16px;
-  }
-
-  .hero-image {
-    justify-content: center;
-    margin-top: 20px;
   }
 
   .hero-image img {
     max-width: 300px;
+  }
+
+  .nav-links, .auth-buttons {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .navbar {
+    padding: 10px 20px;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import "../styles/EligibleSchemes.css";
 
 const EligibleSchemes = () => {
@@ -26,38 +26,46 @@ const EligibleSchemes = () => {
           "http://localhost:5000/api/schemes/check-eligibility",
           eligibilityCriteria
         );
-        setLoading(false);
 
-        if (response.data.schemes.length === 0) {
-          setError("No schemes found matching your eligibility.");
-        } else {
-          setEligibleSchemes(response.data.schemes);
-          setError("");
-        }
+        const schemes = Array.isArray(response.data)
+          ? response.data
+          : response.data.schemes || [];
+
+        setEligibleSchemes(schemes);
+        setError(schemes.length === 0 ? "No schemes found for your criteria." : "");
       } catch (err) {
         console.error("Error fetching eligible schemes:", err);
+        setError("Something went wrong. Please try again.");
+      } finally {
         setLoading(false);
-        setError("An error occurred while fetching eligible schemes.");
       }
     };
 
     fetchEligibleSchemes();
   }, [eligibilityCriteria]);
 
-  if (loading) return <p className="text-center mt-5">Loading...</p>;
-
   return (
     <Container className="eligible-container">
-      <div className="text-center mt-4 mb-5">
-        <h1 className="eligible-heading">Eligible Schemes</h1>
-        <div className="heading-underline"></div>
+      <div className="text-center my-5">
+        <h1 className="eligible-heading">🎯 Eligible Schemes for You</h1>
+        <p className="eligible-subtitle">Based on your inputs, these schemes are recommended:</p>
+        <div className="heading-underline mx-auto"></div>
       </div>
 
-      {error ? (
+      {loading ? (
         <div className="text-center mt-5">
-          <h4>{error}</h4>
-          <Button className="mt-3" variant="secondary" onClick={() => navigate("/")}>
-            Go Back Home
+          <Spinner animation="border" style={{ color: "#09697a" }} />
+          <p className="mt-2">Checking your eligibility...</p>
+        </div>
+      ) : error ? (
+        <div className="text-center mt-5">
+          <h5>{error}</h5>
+          <Button
+            className="mt-3"
+            style={{ backgroundColor: "#09697a", borderColor: "#09697a" }}
+            onClick={() => navigate("/")}
+          >
+            Go Back to Home
           </Button>
         </div>
       ) : (
@@ -69,9 +77,7 @@ const EligibleSchemes = () => {
                   <Card.Title className="scheme-title text-center">
                     {scheme.title || scheme.name}
                   </Card.Title>
-                  <Card.Text className="scheme-description">
-                    {scheme.description}
-                  </Card.Text>
+                  <Card.Text className="scheme-description">{scheme.description}</Card.Text>
                   {scheme.eligibility && (
                     <Card.Text>
                       <strong>Eligibility:</strong> {scheme.eligibility}
@@ -80,8 +86,12 @@ const EligibleSchemes = () => {
                   {scheme.link && (
                     <div className="d-flex justify-content-center mt-3">
                       <a href={scheme.link} target="_blank" rel="noopener noreferrer">
-                        <Button variant="primary" size="sm">
-                          More Info
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          style={{ borderColor: "#09697a", color: "#09697a" }}
+                        >
+                          Learn More
                         </Button>
                       </a>
                     </div>

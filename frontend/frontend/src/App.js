@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+
+
 import HomePage from "./pages/HomePage";
 import FilteringPage from "./pages/Filter";
 import IndividualDetails from "./pages/Individual";
@@ -10,6 +12,7 @@ import SignUpPage from "./pages/Signup";
 import DomainOfEnquiry from "./pages/Domain";
 import EligibleSchemes from "./pages/EligibleSchemes";
 import EligibilityCheck from "./pages/EligibilityCheck";
+import FAQ from "./pages/faq";
 
 // ✅ Import the context provider
 import { UserDataProvider } from "./context/UserDataContext";
@@ -28,6 +31,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/eligibilitycheck" element={<EligibilityCheck />} />
           <Route path="/eligible-schemes" element={<EligibleSchemes />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
       </Router>
     </UserDataProvider>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Use useNavigate for redirection
 import axios from "axios"; // Import axios
-import "../App.css";
+import "../styles/login.css";
 import logo from "../assests/leaf.png"; // Fixed path
 
 const LoginPage = () => {

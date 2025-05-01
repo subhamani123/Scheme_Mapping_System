@@ -13,7 +13,7 @@ const HomePage = () => {
       <nav className="navbar">
         <div className="logo">
           <img src={logo} alt="Logo" className="nav-logo" />
-          Namma TN Schemes
+          <span className="brand-name">Namma TN Schemes</span>
         </div>
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
@@ -25,6 +25,11 @@ const HomePage = () => {
         <div className="auth-buttons">
           <Link to="/login"><button className="signin-btn">Sign In</button></Link>
           <Link to="/signup"><button className="signup-btn">Sign Up</button></Link>
+        </div>
+        <div className="menu-toggle">
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
       </nav>
 

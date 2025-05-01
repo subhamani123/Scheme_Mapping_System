@@ -8,25 +8,33 @@
 .eligible-heading {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 10px;
+  color: #09697a;
+  text-align: center;
+}
+
+.eligible-subtitle {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
 }
 
 .heading-underline {
   width: 80px;
   height: 4px;
-  background-color: #007bff;
-  margin: 0 auto 30px;
+  background-color: #09697a;
+  margin: 10px auto 30px auto; /* ← centers the underline */
   border-radius: 2px;
 }
 
-/* Increased spacing between cards */
+
 .scheme-card {
+  border: 2px solid #09697a;         /* ✅ Add border with theme color */
   border-radius: 12px;
   padding: 15px;
-  margin-bottom: 30px; /* Add extra space between rows */
+  margin-bottom: 30px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* subtle shadow */
 }
 
 .scheme-card:hover {
@@ -34,12 +42,14 @@
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
 }
 
+
 .scheme-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #09697a; /* Match your theme */
   margin-bottom: 12px;
 }
+
 
 .scheme-description {
   font-size: 0.95rem;

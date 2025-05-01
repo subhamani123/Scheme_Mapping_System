@@ -23,7 +23,7 @@ const EligibilityCheck = () => {
 
     const dataToSubmit = {
       ...userData,
-      category: povertyLineCategory,
+      povertyLineCategory,
       exServicemen: exService === "Yes",
       geoCategory,
       physicallyDisabled: disability === "Yes",
