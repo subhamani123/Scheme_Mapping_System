@@ -1,6 +1,6 @@
 .faq-section {
     padding: 40px 20px;
-    background-color: #f1f1f1;
+    background-color: #09697a;;
   }
   
   .faq-container {
@@ -105,5 +105,15 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
+    .faq-container {
+      padding: 20px;
+      font-size: 0.95rem;
+    }
+  
+    .faq-title {
+      font-size: 1.6rem;
+    }
   }
   

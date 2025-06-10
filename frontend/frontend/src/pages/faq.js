@@ -1,42 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../styles/faq.css";
 
-const faqs = [
+// Default questions to always show
+const defaultFaqs = [
   {
     question: "What types of schemes are available?",
-    answer:
-      "The system includes schemes for education, healthcare, agriculture, housing, student welfare, and social security offered by the Tamil Nadu government.",
+    answer: "Schemes for education, healthcare, agriculture, housing, welfare, and more.",
   },
   {
     question: "Is my data safe?",
-    answer:
-      "Yes, we ensure all your data is handled securely and is only used to check scheme eligibility. Your information is not shared with third parties.",
-  },
-  {
-    question: "Do I need to register to use the system?",
-    answer:
-      "While browsing schemes is open, we recommend registering so your eligibility checks can be saved and revisited later.",
-  },
-  {
-    question: "Can I apply for schemes directly through this portal?",
-    answer:
-      "This platform guides you to eligible schemes. For application, you'll be redirected to official Tamil Nadu government portals with necessary details.",
+    answer: "Yes, we use secure protocols. Your data isn't shared with third parties.",
   },
 ];
 
 const FAQ = () => {
+  const [faqs, setFaqs] = useState([]);
   const [search, setSearch] = useState("");
   const [userQuestion, setUserQuestion] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
-  const filteredFaqs = faqs.filter((faq) =>
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/faqs");
+        const combined = [...defaultFaqs, ...res.data]; // merge default + backend
+        setFaqs(combined);
+      } catch (error) {
+        console.error("Failed to load FAQs:", error);
+        setFaqs(defaultFaqs); // fallback to defaults
+      }
+    };
+    fetchFaqs();
+  }, []);
+
+  const filteredFaqs = faqs.filter(faq =>
     faq.question.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleSubmit = (e) => {
+  const visibleFaqs = showAll ? filteredFaqs : filteredFaqs.slice(0, 2);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userQuestion.trim()) {
-      alert("Thank you for your question! We'll get back to you soon.");
+    if (!userQuestion.trim()) return;
+
+    try {
+      await axios.post("http://localhost:5000/api/faqs/questions", { question: userQuestion });
+      alert("Thank you! We’ll get back to you soon.");
       setUserQuestion("");
+    } catch (error) {
+      console.error("Error submitting question:", error);
+      alert("Submission failed.");
     }
   };
 
@@ -55,18 +69,34 @@ const FAQ = () => {
         </div>
 
         <div className="faq-list">
-          {filteredFaqs.map((item, index) => (
-            <div className="faq-item" key={index}>
-              <button className="faq-question">{item.question}</button>
-              <div className="faq-answer">{item.answer}</div>
-              <div className="faq-feedback">
-                <span>Was this helpful?</span>
-                <button className="faq-like">👍</button>
-                <button className="faq-dislike">👎</button>
+          {visibleFaqs.length > 0 ? (
+            visibleFaqs.map((item, index) => (
+              <div className="faq-item" key={index}>
+                <button className="faq-question">{item.question}</button>
+                <div className="faq-answer">{item.answer}</div>
+                <div className="faq-feedback">
+                  <span>Was this helpful?</span>
+                  <button className="faq-like">👍</button>
+                  <button className="faq-dislike">👎</button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No FAQs matched your search.</p>
+          )}
         </div>
+
+        {filteredFaqs.length > 2 && (
+          <div style={{ textAlign: "center", marginTop: "10px" }}>
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="faq-submit-btn"
+              style={{ backgroundColor: "#e0e0e0", color: "#09697a" }}
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="faq-form">
           <input

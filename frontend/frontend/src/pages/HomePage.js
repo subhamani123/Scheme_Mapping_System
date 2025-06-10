@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-import heroImage from "../assests/home.webp"; // Ensure the correct path
+import heroImage from "../assests/home.webp";
 import logo from "../assests/leaf.png";
-import FilterPage from "./Filter";  // Import Filter Page
-import SchemePage from "./Schemes"; // Import Schemes Page
+
+import FilterPage from "./Filter";
+import SchemePage from "./Schemes";
+import FAQ from "./faq";
+import ContactPage from "./contact";
 
 const HomePage = () => {
   return (
@@ -17,10 +20,10 @@ const HomePage = () => {
         </div>
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/filter">Filter</Link></li>
+          <li><Link to="/filter">Discover</Link></li>
           <li><Link to="/schemes">Schemes</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/faq">FAQ</Link></li>
+          <li><Link to="/faq">Faq</Link></li>
         </ul>
         <div className="auth-buttons">
           <Link to="/login"><button className="signin-btn">Sign In</button></Link>
@@ -50,14 +53,24 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Filter Page Below HomePage */}
+      {/* Filter Page Below Hero */}
       <section id="filter">
         <FilterPage />
       </section>
 
-      {/* Schemes Page Below Filter Page */}
+      {/* Schemes Page Below Filter */}
       <section id="schemes">
         <SchemePage />
+      </section>
+
+      {/* FAQ Section Below Schemes */}
+      <section id="faq">
+        <FAQ />
+      </section>
+
+      {/* Contact Section Below FAQ */}
+      <section id="contact">
+        <ContactPage />
       </section>
     </div>
   );

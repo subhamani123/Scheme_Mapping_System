@@ -19,6 +19,39 @@ const tnStudentSchemes = [
     }
   },
   {
+    title: "Tamil Nadu Scholarship for Differently Abled Students",
+    description: "Monthly financial aid and fee exemption for differently-abled students in schools and colleges.",
+    eligibilityCriteria: {
+      profession: "Student",
+      studentCategory: "undergraduate",
+      domainOfInquiry: "Education",
+      casteCategory: "Any",
+      gender: "Any",
+      geoCategory: "Any",
+      povertyLineCategory: "Any",
+      exServicemen: false,
+      physicallyDisabled: true,
+      maritalStatus: "Any"
+    }
+  },
+  {
+  title: "Tamil Pudhalvan Scheme",
+  description: "Financial assistance of ₹1000 per month for male students from government schools pursuing higher education.",
+  eligibilityCriteria: {
+    gender: "Male",
+    profession: "Student",
+    casteCategory: "Any",
+    studentCategory: "undergraduate",
+    domainOfInquiry: "Education",
+    geoCategory: "Any",
+    povertyLineCategory: "Any",
+    exServicemen: false,
+    physicallyDisabled: false,
+    maritalStatus: "Single"
+  }
+},
+
+  {
     title: "Free Bicycle Scheme",
     description: "Free bicycles for students studying in Government and Government-aided schools (Classes 11 & 12).",
     eligibilityCriteria: {
